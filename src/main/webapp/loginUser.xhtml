@@ -10,18 +10,18 @@
         <h:form id="form" prependId="false">
             <h:panelGrid columns="2" width="100%">
 		<h:column headerClass="columnCenter">
-                    <p:fieldset legend="Login User:" style="height: 140px;">
+                    <p:fieldset legend="#{appbundle.userLogin}:" style="height: 140px;">
 
                         <p:panelGrid id="panel">	                            
                             <p:row>
                                 <p:column>
                                     <p:inputText id="username" required="true" value="#{userLoginController.username}" autocomplete="off" />	
-                                    <p:watermark for="username" value="user" />	
+                                    <p:watermark for="username" value="#{appbundle.user}" />	
                                                                         
                                     <p:password id="password" required="true"  value="#{userLoginController.password}" autocomplete="off" />	
-                                    <p:watermark for="password" value="password" />
+                                    <p:watermark for="password" value="#{appbundle.password}" />
                                     
-                                    <p:commandButton value="Aceptar" action="#{userLoginController.loginUser()}" update="form"/>
+                                    <p:commandButton value="#{appbundle.buttonAccept}" action="#{userLoginController.loginUser()}" update="form"/>
                                 
                                 </p:column>                                 
                             </p:row>
