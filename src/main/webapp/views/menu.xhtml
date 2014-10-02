@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:h="http://java.sun.com/jsf/html"      
+      xmlns:p="http://primefaces.org/ui"> 
+    
+    <h:head>
+        <h:outputStylesheet name="css/cssLayout.css" library="default" />
+    </h:head>
+    
+    <h:body> 
+        <h:form prependId="false">
+            <p:megaMenu autoDisplay="false">                 
+                
+                <p:submenu label="USUARIOS" icon="ui-icon-document" >
+                    <p:column>
+                        <p:submenu label="ABM" >
+                            <p:menuitem value="Listado 1 "  />
+                            <p:menuitem value="Listado 2" onclick="alert('/views/pag.xhtml');" />
+                        </p:submenu>
+                    </p:column>
+                </p:submenu>  
+                
+            </p:megaMenu>
+        </h:form>
+    </h:body> 
+</html>
+
