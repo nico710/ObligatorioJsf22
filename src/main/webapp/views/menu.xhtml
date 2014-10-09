@@ -10,11 +10,12 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui"> 
     
     <h:head>
-        <h:outputStylesheet name="css/cssLayout.css" library="default" />
+       
     </h:head>
     
     <h:body> 
         <h:form prependId="false">
+            <p:growl id="growl" sticky="true" showDetail="true"/>
             <p:megaMenu autoDisplay="false">                 
                 
                 <p:submenu label="USUARIOS" icon="ui-icon-document" >
