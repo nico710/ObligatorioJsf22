@@ -211,8 +211,7 @@ div.vf-menu {
 	height: 35px;
 }
 
-div.ui-menu,div.sm-ui-menu ul.sm {
-	background: none;
+div.ui-menu,div.sm-ui-menu ul.sm {	
 	border: none;
 }
 
@@ -302,7 +301,7 @@ span.vf-button-logout .vf-hlink-warning {
 
 .ui-menu.ui-menubar .menu-width .ui-menu-list {
 	width: auto !important;
-	white-space: pre;
+	white-space: pre;        
 }
 
 .ui-menu.ui-menubar .menu-width ul.ui-menu-list .ui-menuitem {
@@ -326,7 +325,7 @@ a>img {
 	top: 120px !important;
 }
 
-body.vf-jsp-view .ui-growl {
+body.jsp-view .ui-growl {
 	top: 5px !important;
 }
 
