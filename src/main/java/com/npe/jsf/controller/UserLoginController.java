@@ -1,15 +1,21 @@
 package com.npe.jsf.controller;
 
 import com.npe.jsf.dataType.User;
-import java.io.PrintStream;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Map;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 
-// Referenced classes of package com.npe.jsf.controller:
-//            ManagerController
+/**
+ *
+ * @author NicolasP1
+ */
 
+@Named("viewAccessControllerDS")
+@ViewAccessScoped
 public class UserLoginController
     implements Serializable
 {
@@ -64,26 +70,17 @@ public class UserLoginController
     public String loginUser()
     {
         System.out.println("verifico usuario: ");
-        Map users = manager.getUsers();
-        Map userOnline = manager.getUserOnline();
-        String key;
-        for(Iterator it = userOnline.keySet().iterator(); it.hasNext(); System.out.println((new StringBuilder()).append("Clave-: ").append(key).append(" -> Valor-: ").append(userOnline.get(key)).toString()))
-        {
-            key = (String)it.next();
-        }
-
-        System.out.println((new StringBuilder()).append("username-: ").append(username).toString());
-        System.out.println((new StringBuilder()).append("paswword_: ").append(password).toString());
-        System.out.println((new StringBuilder()).append("users: ").append(users).toString());
-        System.out.println((new StringBuilder()).append("userOnline: ").append(userOnline).toString());
+        Map<String, User> users = manager.getUsers();
+        Map<String, User> userOnline = manager.getUserOnline();
+       
         if(users == null)
         {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al cargar Usuarios del sistema", "1");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return "";
         }
-        User user = (User)users.get(username);
-        System.out.println((new StringBuilder()).append("user: ").append(user).toString());
+        User user = users.get(username);
+        
         if(user != null && user.getPassword().trim().equalsIgnoreCase(password.trim()))
         {
             if(userOnline.get(username) == null)
@@ -107,7 +104,6 @@ public class UserLoginController
 
     public void logout()
     {
-        System.out.println((new StringBuilder()).append("session.logout()-: ").append(userView.getCI()).toString());
         manager.removeUserOnline(userView.getCI());
     }
 }
