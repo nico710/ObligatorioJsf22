@@ -13,6 +13,7 @@ public class User {
     
     private String rol;
     private String name;
+    private String password;
     private String surname;
     private String CI;
     private int birthday;
@@ -34,6 +35,14 @@ public class User {
     private String previousCompanyName;
     private String previousAddresCompany;
     private int previusDateEntry;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getRol() {
         return rol;

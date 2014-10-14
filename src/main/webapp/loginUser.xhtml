@@ -8,11 +8,11 @@
         <h:outputStylesheet name="css/cssLayout.css"  />
     </h:head>
     <h:body>
-               
-        <h:form id="form" prependId="false">
-            
-            <p:growl autoUpdate="true" showDetail="false" showSummary="true" sticky="true"/>
-            
+
+        <p:growl id="mensajes" autoUpdate="true" showDetail="false" showSummary="true" sticky="true"/>
+                   
+        <h:form id="form" prependId="false" styleClass="loginForm">
+                       
             <h:panelGrid columns="2" width="100%">
 		<h:column headerClass="columnCenter">
                     <p:fieldset legend="#{appbundle.userLogin}:" style="height: 140px;">
@@ -26,8 +26,8 @@
                                     <p:password id="password" required="true"  value="#{userLoginController.password}" autocomplete="off" />	
                                     <p:watermark for="password" value="#{appbundle.password}" />
                                     
-                                    <p:commandButton value="#{appbundle.buttonAccept}" action="#{userLoginController.loginUser()}" update="form"/>
-                                
+                                    <p:commandButton value="#{appbundle.buttonLogin}" action="#{userLoginController.loginUser()}" update=":form :mensajes"/>
+                                    
                                 </p:column>                                 
                             </p:row>
                         </p:panelGrid>

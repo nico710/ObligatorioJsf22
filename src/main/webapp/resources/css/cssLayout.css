@@ -332,3 +332,29 @@ body.jsp-view .ui-growl {
 div.vfc-center-content {
 	text-align: center !important;
 }
+logout-margin{
+    margin-left:600px !important;
+    font-size: 11px !important;
+}
+
+loginForm {
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-ms-border-radius: 8px;
+	-o-border-radius: 8px;
+	border-radius: 8px;
+	-webkit-box-shadow: 0 1px 0 white, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+	-moz-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+	-ms-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+	-o-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+	box-shadow: 0 1px 0 white, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+	border: 1px solid #C4C6CA;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	padding: 25px 0 0;
+	position: relative;
+	text-align: center;
+	text-shadow: 0 1px 0 white;
+	width: 410px;
+	background-color: #fff;	
+}
