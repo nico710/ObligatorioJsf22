@@ -358,3 +358,15 @@ loginForm {
 	width: 410px;
 	background-color: #fff;	
 }
+
+.left_td {
+	text-align: left;
+}
+
+.center_td {
+	text-align: center;
+}
+
+.right_td {
+	text-align: right !important;
+}
