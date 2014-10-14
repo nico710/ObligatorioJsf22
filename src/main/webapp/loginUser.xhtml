@@ -20,13 +20,13 @@
                         <p:panelGrid id="panel">	                            
                             <p:row>
                                 <p:column>
-                                    <p:inputText id="username" required="true" value="#{userLoginController.username}" autocomplete="off" />	
+                                    <p:inputText id="username" required="true" value="#{userController.username}" autocomplete="off" />	
                                     <p:watermark for="username" value="#{appbundle.user}" />	
                                                                         
-                                    <p:password id="password" required="true"  value="#{userLoginController.password}" autocomplete="off" />	
+                                    <p:password id="password" required="true"  value="#{userController.password}" autocomplete="off" />	
                                     <p:watermark for="password" value="#{appbundle.password}" />
                                     
-                                    <p:commandButton value="#{appbundle.buttonLogin}" action="#{userLoginController.loginUser()}" update=":form :mensajes"/>
+                                    <p:commandButton value="#{appbundle.buttonLogin}" action="#{userController.loginUser()}" update=":form :mensajes"/>
                                     
                                 </p:column>                                 
                             </p:row>
