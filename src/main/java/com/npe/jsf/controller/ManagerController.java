@@ -26,7 +26,7 @@ public class ManagerController implements Serializable {
 
     @PostConstruct
     public void init()
-    {
+    { 
         userOnline = new HashMap<String,User>();
         users = new HashMap<String,User>();
         
