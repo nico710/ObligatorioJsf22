@@ -21,7 +21,7 @@ and open the template in the editor.
         <h:form id="form" prependId="false">
            <p:growl id="growl" sticky="true" showDetail="true"/>
             
-           <p:commandLink id="logout" style="margin-left:90%; font-size: 25px" action="#{userLoginController.logout}" oncomplete="logout(xhr, status, args)">
+           <p:commandLink id="logout" style="margin-left:90%; font-size: 25px" action="#{userController.logout}" oncomplete="logout(xhr, status, args)">
             <h:outputText value="logout" />
            </p:commandLink>
             
@@ -30,7 +30,7 @@ and open the template in the editor.
                 <p:submenu styleClass="menu-width" label="USUARIOS" icon="ui-icon-document" >
                     <p:column>
                         <p:submenu label="ABM" >
-                            <p:menuitem value="#{userLoginController.userView.CI}"  />
+                            <p:menuitem value="#{userController.userView.CI}"  />
                             <p:menuitem value="Listado 2" onclick="alert('/views/pag.xhtml');" />
                         </p:submenu>
                     </p:column>
