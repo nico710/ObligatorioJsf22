@@ -7,7 +7,8 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"      
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"> 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" > 
     
     <h:head>
        <h:outputStylesheet name="css/cssLayout.css"  />
@@ -15,14 +16,28 @@ and open the template in the editor.
     </h:head>
     <h:body>
        <p:dataTable id="tblUsers" var="user" value="#{usersLoggedController.usersLogged}" paginator="true" rows="20" paginatorPosition="bottom" scrollable="true" 
-                    emptyMessage="#Sin Registros" scrollHeight="500" selectionMode="single" selection="#{usersLoggedController.selectedUser}" rowKey="#{user.CI}">
+                    emptyMessage="Sin Registros" scrollHeight="500" selectionMode="single" selection="#{usersLoggedController.selectedUser}" rowKey="#{user.CI}">
+            <p:column headerText="Nombre"  styleClass="left_td">
+                <h:outputText value="#{user.name}" />
+	    </p:column>  
+            <p:column headerText="Apellido"  styleClass="left_td">
+                <h:outputText value="#{user.surname}" />
+	    </p:column>  
+            <p:column headerText="CI"  styleClass="right_td">
+                <h:outputText value="#{user.CI}" />
+	    </p:column> 
+            <p:column headerText="Nacimiento"  styleClass="center_td">
+                <h:outputText value="#{user.birthday}" >
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>    
+	    </p:column>  
+            <p:column headerText="E-mail"  styleClass="center_td">
+                <h:outputText value="#{user.mail}" />
+	    </p:column>  
+            <p:column headerText="Pais"  styleClass="left_td">
+                <h:outputText value="#{user.country}" />
+	    </p:column>  
             
-           <p:column headerText="CI"  styleClass="right_td">
-               <h:outputText value="#{user.CI}" />
-	   </p:column>     
-           <p:column headerText="Password"  styleClass="right_td">
-               <h:outputText value="#{user.password}" />
-	   </p:column> 
        </p:dataTable>   
     </h:body>
 
