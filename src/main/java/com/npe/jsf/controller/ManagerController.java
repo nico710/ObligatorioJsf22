@@ -7,6 +7,10 @@ package com.npe.jsf.controller;
 
 import com.npe.jsf.dataType.User;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -25,28 +29,48 @@ public class ManagerController implements Serializable {
     Map<String,User> users;
 
     @PostConstruct
-    public void init()
+    public void init() 
     { 
         userOnline = new HashMap<String,User>();
         users = new HashMap<String,User>();
+        DateFormat df = new SimpleDateFormat("yyyyMMdd");
         
-        User user = new User();
+        try {
+            User user = new User();
         user.setCI("1234");
         user.setPassword("admin");
+        user.setCountry("Uruguay");
+        user.setBirthday(df.parse(String.valueOf(19760317)));
+        user.setSurname("Recoba");
+        user.setName("Alvaro");
+        user.setMail("alvaro@gmail.com");
         
         User user2 = new User();
         user2.setCI("5678");
         user2.setPassword("admin");
+        user2.setCountry("EE.UU");
+        user2.setBirthday(df.parse(String.valueOf(19750518)));
+        user2.setSurname("Jack");
+        user2.setName("Johnson");
+        user2.setMail("jonhson@hotmail.com");
         
         User user3 = new User();
         user3.setCI("admin");
         user3.setPassword("admin");
+        user3.setCountry("Inglaterra");
+        user3.setBirthday(df.parse(String.valueOf(19450330)));
+        user3.setSurname("Clapton");
+        user3.setName("Eric");
+        user3.setMail("clapton@yahoo.com");
         
         users.put(user.getCI(), user);    
         users.put(user2.getCI(), user2);
         users.put(user3.getCI(), user3);
         
         userOnline.put(user3.getCI(), user3);
+        } catch (Exception e) {
+        }
+        
     }
 
     public Map<String, User> getUserOnline() {

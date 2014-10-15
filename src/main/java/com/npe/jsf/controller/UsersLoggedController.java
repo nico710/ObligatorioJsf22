@@ -33,7 +33,7 @@ public class UsersLoggedController implements Serializable{
 
     @PostConstruct
     public void init() {
-        System.out.println("----DENTRO DEL usersLoggedController.init()...");
+        System.out.println("1----DENTRO DEL usersLoggedController.init()...");
         
         usersLogged = updateUsersLogged();
        
@@ -57,8 +57,9 @@ public class UsersLoggedController implements Serializable{
     
     public List<User> updateUsersLogged(){
         List<User> list = new ArrayList<User>();
-        Map<String, User> userOnline = manager.userOnline;
+        Map<String, User> userOnline = manager.getUserOnline();
         Iterator it = userOnline.keySet().iterator();
+        
         while(it.hasNext()){
             String key = (String) it.next();
             System.out.println("Clave: " + key + " -> Valor: " + userOnline.get(key));

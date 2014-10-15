@@ -5,6 +5,8 @@
  */
 package com.npe.jsf.dataType;
 
+import java.util.Date;
+
 /**
  *
  * @author NicolasP1
@@ -16,7 +18,7 @@ public class User {
     private String password;
     private String surname;
     private String CI;
-    private int birthday;
+    private Date birthday;
     private String mail;
     private String country;
     private String pathPhoto;
@@ -25,16 +27,16 @@ public class User {
     private String motherName;
     private String fatherSurname;
     private String motherSurname;
-    private int fatherBirthday;
-    private int motherBirthday;
+    private Date fatherBirthday;
+    private Date motherBirthday;
     
     private String companyName;
     private String addresCompany;
-    private int dateEntryCompany;
+    private Date dateEntryCompany;
     
     private String previousCompanyName;
     private String previousAddresCompany;
-    private int previusDateEntry;
+    private Date previusDateEntry;
 
     public String getPassword() {
         return password;
@@ -76,11 +78,11 @@ public class User {
         this.CI = CI;
     }
 
-    public int getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(int birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -140,19 +142,19 @@ public class User {
         this.motherSurname = motherSurname;
     }
 
-    public int getFatherBirthday() {
+    public Date getFatherBirthday() {
         return fatherBirthday;
     }
 
-    public void setFatherBirthday(int fatherBirthday) {
+    public void setFatherBirthday(Date fatherBirthday) {
         this.fatherBirthday = fatherBirthday;
     }
 
-    public int getMotherBirthday() {
+    public Date getMotherBirthday() {
         return motherBirthday;
     }
 
-    public void setMotherBirthday(int motherBirthday) {
+    public void setMotherBirthday(Date motherBirthday) {
         this.motherBirthday = motherBirthday;
     }
 
@@ -172,11 +174,11 @@ public class User {
         this.addresCompany = addresCompany;
     }
 
-    public int getDateEntryCompany() {
+    public Date getDateEntryCompany() {
         return dateEntryCompany;
     }
 
-    public void setDateEntryCompany(int dateEntryCompany) {
+    public void setDateEntryCompany(Date dateEntryCompany) {
         this.dateEntryCompany = dateEntryCompany;
     }
 
@@ -196,11 +198,11 @@ public class User {
         this.previousAddresCompany = previousAddresCompany;
     }
 
-    public int getPreviusDateEntry() {
+    public Date getPreviusDateEntry() {
         return previusDateEntry;
     }
 
-    public void setPreviusDateEntry(int previusDateEntry) {
+    public void setPreviusDateEntry(Date previusDateEntry) {
         this.previusDateEntry = previusDateEntry;
     }
     
