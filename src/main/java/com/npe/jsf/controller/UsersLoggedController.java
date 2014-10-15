@@ -69,5 +69,11 @@ public class UsersLoggedController implements Serializable{
         return list;
     }
     
+    public void update(){
+        System.out.println("update userlogged---> "+usersLogged);
+        usersLogged = updateUsersLogged();
+        System.out.println("despues update userlogged---> "+usersLogged);
+    }
+    
     
 }

@@ -13,14 +13,14 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author NicolasP1
+ * @author NicolasP1 
  */
 @Named("userController")
-@ViewAccessScoped
+@javax.faces.bean.SessionScoped
 public class UserController implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,12 +35,13 @@ public class UserController implements Serializable {
     private User userView;
 
     @PostConstruct
-    public void init() {
-        System.out.println("DENTRO DEL init()...");
+    public void init() {        
         username = "";
         password = "";
     }
 
+    // Geters and Setters ------------------------------------------------------
+    
     public String getUsername() {
         return username;
     }
@@ -64,7 +65,9 @@ public class UserController implements Serializable {
     public void setUserView(User userView) {
         this.userView = userView;
     }
-
+    
+    // Actions -----------------------------------------------------------------
+    
     public String loginUser() {        
         Map<String, User> users = manager.getUsers();
         Map<String, User> userOnline = manager.getUserOnline();
@@ -75,8 +78,7 @@ public class UserController implements Serializable {
             return "";
         }
         User user = users.get(username);
-        System.out.println("user: "+user);
-        System.out.println("user: "+user.getCI());
+        System.out.println("user: "+user);        
 
         if (user != null && user.getPassword().trim().equalsIgnoreCase(password.trim())) {
             if (userOnline.get(username) == null) {
@@ -96,7 +98,14 @@ public class UserController implements Serializable {
     }
 
     public void logout() {
-        System.out.println("userView::: " + userView);
+        System.out.println("userView:: " + userView);
         manager.removeUserOnline(userView.getCI());
+        destroySession();
+    }
+    
+     public void destroySession() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        session.invalidate();
     }
 }
