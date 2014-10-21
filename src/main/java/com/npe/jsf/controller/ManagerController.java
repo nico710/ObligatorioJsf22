@@ -36,7 +36,7 @@ public class ManagerController implements Serializable {
         DateFormat df = new SimpleDateFormat("yyyyMMdd");
         
         try {
-            User user = new User();
+        User user = new User();
         user.setCI("1234");
         user.setPassword("admin");
         user.setCountry("Uruguay");
@@ -44,6 +44,7 @@ public class ManagerController implements Serializable {
         user.setSurname("Recoba");
         user.setName("Alvaro");
         user.setMail("alvaro@gmail.com");
+        user.setRol("ADMIN");
         
         User user2 = new User();
         user2.setCI("5678");
@@ -53,6 +54,8 @@ public class ManagerController implements Serializable {
         user2.setSurname("Jack");
         user2.setName("Johnson");
         user2.setMail("jonhson@hotmail.com");
+        user2.setRol("OP");
+        
         
         User user3 = new User();
         user3.setCI("admin");
@@ -62,6 +65,7 @@ public class ManagerController implements Serializable {
         user3.setSurname("Clapton");
         user3.setName("Eric");
         user3.setMail("clapton@yahoo.com");
+        user3.setRol("ADMIN");
         
         users.put(user.getCI(), user);    
         users.put(user2.getCI(), user2);
