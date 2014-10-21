@@ -17,11 +17,15 @@ and open the template in the editor.
     </h:head>
     <h:body>
         
+         <div id="header">                
+            <ui:include src="menu.xhtml"></ui:include>
+         </div>
+        
       <p:spacer height="20" />
             
         
-      <p:growl id="mensajes" autoUpdate="true" showDetail="false" showSummary="true" sticky="true"/>
-      <h:form id="form" prependId="false" >
+      <p:growl id="mensajes1" autoUpdate="true" showDetail="false" showSummary="true" sticky="true"/>
+      <h:form id="form1" prependId="false" >
           <p:separator/>
        <p:dataTable id="tblUsers" var="user" value="#{usersLoggedController.usersLogged}" paginator="true" rows="20" paginatorPosition="bottom" scrollable="true" 
                     emptyMessage="Sin Registros" scrollHeight="500" selectionMode="single" selection="#{usersLoggedController.selectedUser}" rowKey="#{user.CI}">
@@ -48,7 +52,7 @@ and open the template in the editor.
            
            <f:facet name="footer">
                 <h:panelGroup id="buttonSet" style="text-align:left;">
-                        <p:commandButton id="btnAdd" icon="ui-icon-refresh" title="Actualizar" update=":form" action="#{usersLoggedController.update}" />                                
+                        <p:commandButton id="btnAdd" icon="ui-icon-refresh" title="Actualizar" update=":form1" action="#{usersLoggedController.update}" />                                
                 </h:panelGroup>
             </f:facet>
            
