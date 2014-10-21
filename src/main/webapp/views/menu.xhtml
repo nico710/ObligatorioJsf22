@@ -7,8 +7,8 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"      
       xmlns:h="http://java.sun.com/jsf/html"      
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:func="http://com.npe.jsf/functions"> 
     
     <h:head>
        <h:outputStylesheet name="css/cssLayout.css"  />
@@ -28,7 +28,7 @@ and open the template in the editor.
                 
                 <p:submenu styleClass="menu-width" label="USUARIOS" icon="ui-icon-document" >
                     <p:column>
-                        <p:submenu label="ABM" >
+                        <p:submenu label="ABM" rendered="#{func:isAdmin(userController.userView.rol)}">
                             <p:menuitem value="Usuarios Logueados" action="listOfUsersLogged?faces-redirect=true" />
                             <p:menuitem value="#{userController.userView.CI}" onclick="alert('/views/pag.xhtml');" />
                         </p:submenu>
