@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:h="http://java.sun.com/jsf/html"      
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+    
+    <h:head>
+       <h:outputStylesheet name="css/cssLayout.css"  />
+       <h:outputScript name="javascript/script.js"/>
+    </h:head>
+    
+    <h:body> 
+        
+      <div id="header">                
+         <ui:include src="menu.xhtml"></ui:include>
+      </div>
+        
+      <p:spacer height="20" />
+        
+        <h:form>                 
+            <p:growl id="growl" sticky="true" showDetail="false" />
+
+            <p:wizard flowListener="#{userWizardController.onFlowProcess}">
+                <p:tab id="personal" title="Personal">
+                    <p:panel header="Datos Personales">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Nombre: *" />
+                            <p:inputText value="#{userWizardController.user.name}" required="true" label="Nombre">
+                                <f:validateLength minimum="4" maximum="10" />
+                            </p:inputText>
+
+                            <h:outputText value="Apellido: *" />
+                            <p:inputText value="#{userWizardController.user.surname}" required="true" label="Apellido">
+                                 <f:validateLength minimum="4" maximum="15" />
+                            </p:inputText>
+
+                            <h:outputText value="CI: *" />
+                            <p:inputText value="#{userWizardController.user.CI}" maxlength="8" required="true" label="CI">
+                                <f:validateRegex pattern="^[0-9]+$"/>  
+                                <f:validateLength minimum="8" maximum="8"/>
+                            </p:inputText>    
+                            
+                            <h:outputText value="Nacimiento: *" />
+                            <p:calendar id="birthday" value="#{userWizardController.user.birthday}" showOn="button"  required="true" label="Nacimiento"/>
+                            
+                            <h:outputText value="E-mail: " />
+                            <p:inputText value="#{userWizardController.user.mail}" required="false" label="E-mail" >
+                                <f:validateRegex pattern="^$|^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$"/>                                   
+                            </p:inputText>
+                            
+                            <h:outputText value="País: " />
+                            <p:inputText value="#{userWizardController.user.country}" required="false" label="Pais" >
+                                <f:validateRegex pattern="^$|^[a-zA-Z]+$"/>   
+                            </p:inputText>                            
+                           
+                            <h:outputText value="Skip to last: " rendered="false"/>
+                            <h:selectBooleanCheckbox value="#{userWizardController.skip}" rendered="false"/>  
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="family" title="Familiares">
+                    <p:panel header="Datos Familiares">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Nombre Padre: *" />
+                            <p:inputText value="#{userWizardController.user.fatherName}" required="true" label="Padre">
+                                <f:validateLength minimum="4" maximum="15" />
+                            </p:inputText>
+                            
+                            <h:outputText value="Apellido Padre: *" />
+                            <p:inputText value="#{userWizardController.user.fatherSurname}" required="true" label="Padre">
+                                <f:validateLength minimum="4" maximum="15" />
+                            </p:inputText>
+
+                            <h:outputText value="Nacimiento Padre: *" />
+                            <p:calendar value="#{userWizardController.user.fatherBirthday}" showOn="button"  required="true" label="Nacimiento"/>
+
+                            <h:outputText value="Nombre Madre: *" />
+                            <p:inputText value="#{userWizardController.user.motherName}" label="Madre">
+                                <f:validateLength minimum="4" maximum="15" />
+                            </p:inputText>
+                            
+                            <h:outputText value="Apellido Madre: *" />
+                            <p:inputText value="#{userWizardController.user.motherSurname}" required="true" label="Madre">
+                                <f:validateLength minimum="4" maximum="15" />
+                            </p:inputText>
+
+                            <h:outputText value="Nacimiento Madre: *" />
+                            <p:calendar value="#{userWizardController.user.motherBirthday}" showOn="button"  required="true" label="Nacimiento"/>
+
+                            <h:outputText value="Skip to last: " rendered="false"/>
+                            <h:selectBooleanCheckbox value="#{userWizardController.skip}" rendered="false"/>
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="work" title="Laboral">
+                    <p:panel header="Datos Laborales">
+                        <p:messages />
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Empresa Actual: *" />
+                            <p:inputText value="#{userWizardController.user.companyName}" required="true" label="Empresa">
+                                <f:validateLength minimum="3" maximum="15" />
+                            </p:inputText>
+
+                            <h:outputText value="Direccion: *" />
+                            <p:inputText value="#{userWizardController.user.addresCompany}" required="true" label="Direccion">
+                                <f:validateLength minimum="3" maximum="15" />
+                            </p:inputText>
+                            
+                            <h:outputText value="Fecha Ingreso: *" />
+                            <p:calendar value="#{userWizardController.user.dateEntryCompany}" showOn="button"  required="true" label="Ingreso"/>
+                            
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+                <p:tab id="confirm" title="Confirmacion">
+                    <p:panel header="Confirmation">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid" width="50%">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Nombre:   " />
+                                <h:outputText value="#{userWizardController.user.name}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Apellido:  " />
+                                <h:outputText value="#{userWizardController.user.surname}" styleClass="outputLabel"/>
+                                
+                                <h:outputText value="CI:   " />
+                                <h:outputText value="#{userWizardController.user.CI}" styleClass="outputLabel"/>                                
+
+                                <h:outputText value="Fecha Nacimiento:  " />
+                                <h:outputText value="#{userWizardController.user.birthday}" styleClass="outputLabel">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>  
+                                
+                                <h:outputText value="Mail:  " />
+                                <h:outputText value="#{userWizardController.user.mail}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Pais:  " />
+                                <h:outputText value="#{userWizardController.user.country}" styleClass="outputLabel"/>
+                                
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Empresa " />
+                                <h:outputText value="#{userWizardController.user.companyName}" styleClass="outputLabel"/>
+                                
+                                <h:outputText value="Ingreso:  " />
+                                <h:outputText value="#{userWizardController.user.dateEntryCompany}" styleClass="outputLabel">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                                
+                                <h:outputText value="Direccion:  " />
+                                <h:outputText value="#{userWizardController.user.addresCompany}" styleClass="outputLabel"/>
+                                
+                                <h:outputText value="Padre: " />
+                                <h:outputText value="#{userWizardController.user.fatherSurname} #{userWizardController.user.fatherSurname}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Madre:   " />
+                                <h:outputText value="#{userWizardController.user.motherName} #{userWizardController.user.motherSurname}" styleClass="outputLabel"/>
+                                
+                                
+                            </h:panelGrid>
+
+                            
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" actionListener="#{userWizardController.save}" update="growl" process="@this"/>
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+
+        </h:form>
+    
+    </h:body>
+</html>
