@@ -49,8 +49,8 @@ public class ManagerController implements Serializable {
         user2.setPassword("admin");
         user2.setCountry("EE.UU");
         user2.setBirthday(df.parse(String.valueOf(19750518)));
-        user2.setSurname("Jack");
-        user2.setName("Johnson");
+        user2.setSurname("Johnson");
+        user2.setName("Jack");
         user2.setMail("jonhson@hotmail.com");
         user2.setRol("OP");
         
@@ -111,8 +111,7 @@ public class ManagerController implements Serializable {
         userOnline.remove(user);
     }
     
-     public void removeUserToSystem(String user)
-    {
+     public void removeUserToSystem(String user)    {
         users.remove(user);
     }
     

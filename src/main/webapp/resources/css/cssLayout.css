@@ -180,12 +180,6 @@ div.vf-title-page div.vf-subtitle {
 	font-weight: bold;
 }
 
-.title {
-	font-size: 20px !important;
-	font-weight: bold;
-	color: #006FC0;
-}
-
 div.vf-header-box-top {
 	display: block;
 	height: 81px;
@@ -369,4 +363,11 @@ loginForm {
 
 .right_td {
 	text-align: right !important;
+}
+
+.title {
+	font-size: 25px !important;
+	font-weight: bold;
+	color: #006FC0;
+        text-align: center;
 }

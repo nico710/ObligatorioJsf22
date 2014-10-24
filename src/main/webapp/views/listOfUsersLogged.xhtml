@@ -16,51 +16,60 @@ and open the template in the editor.
        <h:outputScript name="javascript/script.js"/>
     </h:head>
     <h:body>
-        
-         <div id="header">                
-            <ui:include src="menu.xhtml"></ui:include>
-         </div>
-        
-      <p:spacer height="20" />
+        <ui:composition template="template.xhtml">            
+            <ui:define name="titulo">
+                <h3 class="title">Usuarios Conectados</h3>
+               
+            </ui:define>
             
-        
-      <p:growl id="mensajes1" autoUpdate="true" showDetail="false" showSummary="true" sticky="true"/>
-      <h:form id="form1" prependId="false" >
-          <p:separator/>
-       <p:dataTable id="tblUsers" var="user" value="#{usersLoggedController.usersLogged}" paginator="true" rows="20" paginatorPosition="bottom" scrollable="true" 
-                    emptyMessage="Sin Registros" scrollHeight="500" selectionMode="single" selection="#{usersLoggedController.selectedUser}" rowKey="#{user.CI}">
-            <p:column headerText="Nombre"  styleClass="left_td">
-                <h:outputText value="#{user.name}" />
-	    </p:column>  
-            <p:column headerText="Apellido"  styleClass="left_td">
-                <h:outputText value="#{user.surname}" />
-	    </p:column>  
-            <p:column headerText="CI"  styleClass="right_td">
-                <h:outputText value="#{user.CI}" />
-	    </p:column> 
-            <p:column headerText="Nacimiento"  styleClass="center_td">
-                <h:outputText value="#{user.birthday}" >
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                </h:outputText>    
-	    </p:column>  
-            <p:column headerText="E-mail"  styleClass="center_td">
-                <h:outputText value="#{user.mail}" />
-	    </p:column>  
-            <p:column headerText="Pais"  styleClass="left_td">
-                <h:outputText value="#{user.country}" />
-	    </p:column>  
-             <p:column headerText="Rol"  styleClass="center_td">
-                 <h:outputText value="#{user.rol}" />
-	    </p:column>             
-           
-           <f:facet name="footer">
-                <h:panelGroup id="buttonSet" style="text-align:left;">
-                        <p:commandButton id="btnAdd" icon="ui-icon-refresh" title="Actualizar" update=":form1" action="#{usersLoggedController.update}" />                                
-                </h:panelGroup>
-            </f:facet>
-           
-       </p:dataTable>  
-      </h:form>
+            <ui:define name="contenido">
+                
+                <div id="menu">                
+                   <ui:include src="menu.xhtml"></ui:include>
+                </div>
+
+                <p:spacer height="20" />
+
+
+             <p:growl id="mensajes1" autoUpdate="true" showDetail="false" showSummary="true" sticky="true"/>
+             <h:form id="form1" prependId="false" >
+                 <p:separator/>
+                <p:dataTable id="tblUsers" var="user" value="#{usersLoggedController.usersLogged}" paginator="true" rows="20" paginatorPosition="bottom" scrollable="true" 
+                             emptyMessage="Sin Registros" scrollHeight="210" selectionMode="single" selection="#{usersLoggedController.selectedUser}" rowKey="#{user.CI}">
+                     <p:column headerText="Nombre"  styleClass="left_td">
+                         <h:outputText value="#{user.name}" />
+                     </p:column>  
+                     <p:column headerText="Apellido"  styleClass="left_td">
+                         <h:outputText value="#{user.surname}" />
+                     </p:column>  
+                     <p:column headerText="CI"  styleClass="right_td">
+                         <h:outputText value="#{user.CI}" />
+                     </p:column> 
+                     <p:column headerText="Nacimiento"  styleClass="center_td">
+                         <h:outputText value="#{user.birthday}" >
+                             <f:convertDateTime pattern="dd/MM/yyyy"/>
+                         </h:outputText>    
+                     </p:column>  
+                     <p:column headerText="E-mail"  styleClass="center_td">
+                         <h:outputText value="#{user.mail}" />
+                     </p:column>  
+                     <p:column headerText="Pais"  styleClass="left_td">
+                         <h:outputText value="#{user.country}" />
+                     </p:column>  
+                      <p:column headerText="Rol"  styleClass="center_td">
+                          <h:outputText value="#{user.rol}" />
+                     </p:column>             
+
+                    <f:facet name="footer">
+                         <h:panelGroup id="buttonSet" style="text-align:left;">
+                                 <p:commandButton id="btnAdd" icon="ui-icon-refresh" title="Actualizar" update=":form1" action="#{usersLoggedController.update}" />                                
+                         </h:panelGroup>
+                     </f:facet>
+
+                </p:dataTable>  
+             </h:form>
+       </ui:define>            
+     </ui:composition> 
     </h:body>
 
 </html>

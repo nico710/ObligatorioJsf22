@@ -17,11 +17,75 @@ and open the template in the editor.
     </h:head>
     
     <h:body> 
+        <ui:composition template="template.xhtml">            
+            <ui:define name="titulo">
+                <h3 class="title">Gestion de Usuarios</h3>
+               
+            </ui:define>
+            
+            <ui:define name="contenido">
+                
+          
+                <div id="header">                
+                   <ui:include src="menu.xhtml"></ui:include>
+                </div>
         
-      <div id="header">                
-         <ui:include src="menu.xhtml"></ui:include>
-      </div>
-        
+      <p:spacer height="20" />
+      
+      <h:form id="formUser" prependId="false" >
+          <p:separator/>
+          <p:dataTable id="tblUsers" var="userTable" value="#{userWizardController.usersSystem}" paginator="true" rows="20" paginatorPosition="bottom" scrollable="true" 
+                    emptyMessage="Sin Registros" scrollHeight="150" selectionMode="single" selection="#{userWizardController.selectedUser}" rowKey="#{userTable.CI}">
+            <p:ajax event="rowSelect" update="btnDel" />
+              
+            <p:column headerText="Nombre"  styleClass="left_td">
+                <h:outputText value="#{userTable.name}" />
+	    </p:column>  
+            <p:column headerText="Apellido"  styleClass="left_td">
+                <h:outputText value="#{userTable.surname}" />
+	    </p:column>  
+            <p:column headerText="CI"  styleClass="right_td">
+                <h:outputText value="#{userTable.CI}" />
+	    </p:column> 
+            <p:column headerText="Nacimiento"  styleClass="center_td">
+                <h:outputText value="#{userTable.birthday}" >
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>    
+	    </p:column>  
+            <p:column headerText="E-mail"  styleClass="center_td">
+                <h:outputText value="#{userTable.mail}" />
+	    </p:column>  
+            <p:column headerText="Pais"  styleClass="left_td">
+                <h:outputText value="#{userTable.country}" />
+	    </p:column>  
+             <p:column headerText="Rol"  styleClass="center_td">
+                 <h:outputText value="#{userTable.rol}" />
+	    </p:column>             
+           
+           <f:facet name="footer">
+                <h:panelGroup id="buttonSet" style="text-align:left;">
+                    <p:commandButton id="btnAdd" icon="ui-icon-plus" title="Actualizar" update=":formUser" action="#{userWizardController.update()}" />                                
+                    
+                    <p:commandButton id="btnEdit" icon="ui-icon ui-icon-pencil" title="Actualizar" update=":formUser" action="#{userWizardController.update()}" />                                
+                    
+                    <p:commandButton id="btnDel" icon="ui-icon-trash" title="Actualizar" update=":formUser" action="#{userWizardController.delete()}" disabled="#{userController.userView.CI.equalsIgnoreCase(userWizardController.selectedUser.CI)}">
+                        <p:confirm header="Confirmation" message="Confirma la Operacion?" icon="ui-icon-alert" />
+                    </p:commandButton>                               
+                    
+                </h:panelGroup>
+           </f:facet>
+           
+       </p:dataTable>  
+          
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </p:confirmDialog>
+      </h:form>
+      
+     
+      
+      
       <p:spacer height="20" />
         
         <h:form>                 
@@ -49,7 +113,7 @@ and open the template in the editor.
                             </p:inputText>    
                             
                             <h:outputText value="Nacimiento: *" />
-                            <p:calendar id="birthday" value="#{userWizardController.user.birthday}" showOn="button"  required="true" label="Nacimiento"/>
+                            <p:calendar id="birthday" value="#{userWizardController.user.birthday}" navigator="true" showOn="button"  required="true" label="Nacimiento"/>
                             
                             <h:outputText value="E-mail: " />
                             <p:inputText value="#{userWizardController.user.mail}" required="false" label="E-mail" >
@@ -83,7 +147,7 @@ and open the template in the editor.
                             </p:inputText>
 
                             <h:outputText value="Nacimiento Padre: *" />
-                            <p:calendar value="#{userWizardController.user.fatherBirthday}" showOn="button"  required="true" label="Nacimiento"/>
+                            <p:calendar value="#{userWizardController.user.fatherBirthday}" navigator="true" showOn="button"  required="true" label="Nacimiento"/>
 
                             <h:outputText value="Nombre Madre: *" />
                             <p:inputText value="#{userWizardController.user.motherName}" label="Madre">
@@ -96,7 +160,7 @@ and open the template in the editor.
                             </p:inputText>
 
                             <h:outputText value="Nacimiento Madre: *" />
-                            <p:calendar value="#{userWizardController.user.motherBirthday}" showOn="button"  required="true" label="Nacimiento"/>
+                            <p:calendar value="#{userWizardController.user.motherBirthday}" navigator="true" showOn="button"  required="true" label="Nacimiento"/>
 
                             <h:outputText value="Skip to last: " rendered="false"/>
                             <h:selectBooleanCheckbox value="#{userWizardController.skip}" rendered="false"/>
@@ -119,7 +183,7 @@ and open the template in the editor.
                             </p:inputText>
                             
                             <h:outputText value="Fecha Ingreso: *" />
-                            <p:calendar value="#{userWizardController.user.dateEntryCompany}" showOn="button"  required="true" label="Ingreso"/>
+                            <p:calendar value="#{userWizardController.user.dateEntryCompany}" navigator="true" showOn="button"  required="true" label="Ingreso"/>
                             
                         </h:panelGrid>
                     </p:panel>
@@ -181,6 +245,8 @@ and open the template in the editor.
             </p:wizard>
 
         </h:form>
-    
+      </ui:define>
+            
+    </ui:composition>   
     </h:body>
 </html>
