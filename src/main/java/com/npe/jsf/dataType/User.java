@@ -38,14 +38,6 @@ public class User {
     private String previousAddresCompany;
     private Date previusDateEntry;
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getRol() {
         return rol;
     }
@@ -60,6 +52,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getSurname() {
@@ -205,10 +205,8 @@ public class User {
     public void setPreviusDateEntry(Date previusDateEntry) {
         this.previusDateEntry = previusDateEntry;
     }
+
     
-    
-    
-            
            
     
 }
