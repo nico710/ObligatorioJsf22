@@ -32,7 +32,7 @@ and open the template in the editor.
         
       <p:spacer height="20" />
       
-      <h:form id="formUser" prependId="false" >
+      <h:form id="formUser" prependId="false">
           <p:separator/>
           <p:dataTable id="tblUsers" var="userTable" value="#{userWizardController.usersSystem}" paginator="true" rows="20" paginatorPosition="bottom" scrollable="true" 
                     emptyMessage="Sin Registros" scrollHeight="150" selectionMode="single" selection="#{userWizardController.selectedUser}" rowKey="#{userTable.CI}">
@@ -60,15 +60,18 @@ and open the template in the editor.
 	    </p:column>  
              <p:column headerText="Rol"  styleClass="center_td">
                  <h:outputText value="#{userTable.rol}" />
-	    </p:column>             
+	    </p:column>   
+             <p:column headerText="Estado"  styleClass="center_td">
+                 <h:outputText value="#{userTable.status}" />
+	    </p:column> 
            
            <f:facet name="footer">
                 <h:panelGroup id="buttonSet" style="text-align:left;">
-                    <p:commandButton id="btnAdd" icon="ui-icon-plus" title="Actualizar" update=":formUser" action="#{userWizardController.update()}" />                                
+                    <p:commandButton id="btnAdd" icon="ui-icon-plus" title="Actualizar" update=":formUser" action="#{userWizardController.update()}" rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}"/>                                
                     
-                    <p:commandButton id="btnEdit" icon="ui-icon ui-icon-pencil" title="Actualizar" update=":formUser" action="#{userWizardController.update()}" />                                
+                    <p:commandButton id="btnEdit" icon="ui-icon ui-icon-pencil" title="Actualizar" update=":formUser :formWizard" action="#{userWizardController.update()}" />                                
                     
-                    <p:commandButton id="btnDel" icon="ui-icon-trash" title="Actualizar" update=":formUser" action="#{userWizardController.delete()}" disabled="#{userController.userView.CI.equalsIgnoreCase(userWizardController.selectedUser.CI)}">
+                    <p:commandButton id="btnDel" icon="ui-icon-trash" title="Actualizar" update=":formUser" action="#{userWizardController.delete()}" disabled="#{userController.userView.CI.equalsIgnoreCase(userWizardController.selectedUser.CI)}" rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}">
                         <p:confirm header="Confirmation" message="Confirma la Operacion?" icon="ui-icon-alert" />
                     </p:commandButton>                               
                     
@@ -88,8 +91,8 @@ and open the template in the editor.
       
       <p:spacer height="20" />
         
-        <h:form>                 
-            <p:growl id="growl" sticky="true" showDetail="false" />
+      <h:form id="formWizard" prependId="false">                 
+            <p:growl id="growlWizard" sticky="true" showDetail="false" />
 
             <p:wizard flowListener="#{userWizardController.onFlowProcess}">
                 <p:tab id="personal" title="Personal">
@@ -123,8 +126,22 @@ and open the template in the editor.
                             <h:outputText value="País: " />
                             <p:inputText value="#{userWizardController.user.country}" required="false" label="Pais" >
                                 <f:validateRegex pattern="^$|^[a-zA-Z]+$"/>   
-                            </p:inputText>                            
-                           
+                            </p:inputText>  
+                            
+                            <h:outputText value="Rol: " rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}" />
+                            <h:selectOneMenu id="txtRol" value="#{userWizardController.user.rol}" required="true" label="Rol" rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}">
+                                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="OPERADOR" itemValue="OPERADOR" />      
+                                <f:selectItem itemLabel="ADMINISTRADOR" itemValue="ADMINISTRADOR" />
+                            </h:selectOneMenu>
+                            
+                            <h:outputText value="Estado: " rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}" />
+                            <h:selectOneMenu id="txtStatus" value="#{userWizardController.user.status}" required="true" label="Estado" rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}">
+                                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="ACTIVO" itemValue="ACTIVO" />      
+                                <f:selectItem itemLabel="BLOQUEADO" itemValue="BLOQUEADO" />
+                            </h:selectOneMenu>
+                            
                             <h:outputText value="Skip to last: " rendered="false"/>
                             <h:selectBooleanCheckbox value="#{userWizardController.skip}" rendered="false"/>  
                             
@@ -239,14 +256,15 @@ and open the template in the editor.
                             
                         </h:panelGrid>
 
-                        <p:commandButton value="Submit" actionListener="#{userWizardController.save}" update="growl" process="@this"/>
+                        <p:commandButton value="Submit" actionListener="#{userWizardController.save}" update="growlWizard" process="@this"/>
                     </p:panel>
                 </p:tab>
             </p:wizard>
 
         </h:form>
+      
+        
       </ui:define>
-            
     </ui:composition>   
     </h:body>
 </html>

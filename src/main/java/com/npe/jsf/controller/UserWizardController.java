@@ -32,6 +32,9 @@ public class UserWizardController implements Serializable{
     @Inject
     private ManagerController manager;
     
+    @Inject
+    private UserController userSession;
+    
     private User selectedUser;    
     
     private User user = new User();
@@ -114,20 +117,31 @@ public class UserWizardController implements Serializable{
     
     public List<User> updateUsersSystem(){
         List<User> list = new ArrayList<User>();
-        Map<String, User> userOnline = manager.getUsers();
-        Iterator it = userOnline.keySet().iterator();
         
-        while(it.hasNext()){
-            String key = (String) it.next();
-            list.add(userOnline.get(key));
-        }        
+        System.out.println("Usuario.rol(): "+userSession.getUserView().getRol());
+        
+        if(userSession.getUserView().getRol().equalsIgnoreCase("ADMINISTRADOR")){
+            Map<String, User> userOnline = manager.getUsers();
+            Iterator it = userOnline.keySet().iterator();
+        
+            while(it.hasNext()){
+                String key = (String) it.next();
+                list.add(userOnline.get(key));
+            }        
+        }else{
+            list.add(userSession.getUserView());
+        }
+        
+        
         return list;
     }
     
     public void update(){
         System.out.println("update()...");
-        System.out.println("update()..." + selectedUser);
+        System.out.println("update()..." + selectedUser.getCI());
         usersSystem = updateUsersSystem();
+        
+        user = selectedUser;
     }
     
      public void delete(){

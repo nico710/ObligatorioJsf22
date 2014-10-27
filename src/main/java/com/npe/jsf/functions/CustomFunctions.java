@@ -17,7 +17,7 @@ public class CustomFunctions {
 
     public static boolean isAdmin(String rol) {
         System.out.println("User Rol: " + rol);
-        return "ADMIN".equalsIgnoreCase(rol.trim());
+        return "ADMINISTRADOR".equalsIgnoreCase(rol.trim());
     }
     
 }

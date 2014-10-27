@@ -42,17 +42,19 @@ public class ManagerController implements Serializable {
         user.setSurname("Recoba");
         user.setName("Alvaro");
         user.setMail("alvaro@gmail.com");
-        user.setRol("ADMIN");
+        user.setRol("ADMINISTRADOR");
+        user.setStatus("ACTIVO");
         
         User user2 = new User();
         user2.setCI("5678");
         user2.setPassword("admin");
-        user2.setCountry("EE.UU");
+        user2.setCountry("EEUU");
         user2.setBirthday(df.parse(String.valueOf(19750518)));
         user2.setSurname("Johnson");
         user2.setName("Jack");
         user2.setMail("jonhson@hotmail.com");
-        user2.setRol("OP");
+        user2.setRol("OPERADOR");
+        user2.setStatus("ACTIVO");
         
         
         User user3 = new User();
@@ -63,7 +65,8 @@ public class ManagerController implements Serializable {
         user3.setSurname("Clapton");
         user3.setName("Eric");
         user3.setMail("clapton@yahoo.com");
-        user3.setRol("ADMIN");
+        user3.setRol("ADMINISTRADOR");
+        user3.setStatus("ACTIVO");
         
         users.put(user.getCI(), user);    
         users.put(user2.getCI(), user2);

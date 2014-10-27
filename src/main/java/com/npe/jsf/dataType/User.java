@@ -22,6 +22,7 @@ public class User {
     private String mail;
     private String country;
     private String pathPhoto;
+    private String status;
     
     private String fatherName;
     private String motherName;
@@ -37,6 +38,11 @@ public class User {
     private String previousCompanyName;
     private String previousAddresCompany;
     private Date previusDateEntry;
+
+    public User() {
+        this.rol = "OPERADOR";
+        this.status = "ACTIVO";
+    }
 
     public String getRol() {
         return rol;
@@ -204,6 +210,14 @@ public class User {
 
     public void setPreviusDateEntry(Date previusDateEntry) {
         this.previusDateEntry = previusDateEntry;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     
