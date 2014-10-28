@@ -371,3 +371,20 @@ loginForm {
 	color: #006FC0;
         text-align: center;
 }
+
+.centrar{
+		position: absolute;
+		/*nos posicionamos en el centro del navegador*/
+		top:50%;
+		left:40%;
+		/*determinamos una anchura*/
+		width:500px;
+		/*indicamos que el margen izquierdo, es la mitad de la anchura*/
+		margin-left:-100px;
+		/*determinamos una altura*/
+		height:300px;
+		/*indicamos que el margen superior, es la mitad de la altura*/
+		margin-top:-150px;
+		border:0px solid #808080;
+		padding:5px;
+	}
