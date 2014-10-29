@@ -130,14 +130,12 @@ and open the template in the editor.
                             
                             <h:outputText value="Rol: " rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}" />
                             <h:selectOneMenu id="txtRol" value="#{userWizardController.user.rol}" required="true" label="Rol" rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}">
-                                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
                                 <f:selectItem itemLabel="OPERADOR" itemValue="OPERADOR" />      
                                 <f:selectItem itemLabel="ADMINISTRADOR" itemValue="ADMINISTRADOR" />
                             </h:selectOneMenu>
                             
                             <h:outputText value="Estado: " rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}" />
                             <h:selectOneMenu id="txtStatus" value="#{userWizardController.user.status}" required="true" label="Estado" rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}">
-                                <f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true" />
                                 <f:selectItem itemLabel="ACTIVO" itemValue="ACTIVO" />      
                                 <f:selectItem itemLabel="BLOQUEADO" itemValue="BLOQUEADO" />
                             </h:selectOneMenu>
