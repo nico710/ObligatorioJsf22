@@ -99,7 +99,7 @@ public class UserController implements Serializable {
 
     public void logout() {
         System.out.println("userView:: " + userView);
-        System.out.println("rolex:: " + userView.getRol());
+        System.out.println("rol:: " + userView.getRol());
         manager.removeUserOnline(userView.getNickName());
         destroySession();
     }
