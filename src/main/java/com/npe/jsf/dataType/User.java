@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class User {
     
+    private String nickName;
     private String rol;
     private String name;
     private String password;
@@ -220,7 +221,12 @@ public class User {
         this.status = status;
     }
 
-    
-           
-    
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
 }

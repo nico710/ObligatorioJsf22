@@ -9,6 +9,7 @@ import com.npe.jsf.dataType.User;
 import java.io.Serializable;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpSession;
  * @author NicolasP1 
  */
 @Named("userController")
-@javax.faces.bean.SessionScoped
+@SessionScoped
 public class UserController implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,8 +41,7 @@ public class UserController implements Serializable {
         password = "";
     }
 
-    // Geters and Setters ------------------------------------------------------
-    
+    // Geters and Setters ------------------------------------------------------    
     public String getUsername() {
         return username;
     }
@@ -100,7 +100,7 @@ public class UserController implements Serializable {
     public void logout() {
         System.out.println("userView:: " + userView);
         System.out.println("rolex:: " + userView.getRol());
-        manager.removeUserOnline(userView.getCI());
+        manager.removeUserOnline(userView.getNickName());
         destroySession();
     }
     

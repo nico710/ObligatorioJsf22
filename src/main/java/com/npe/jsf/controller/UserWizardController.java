@@ -41,6 +41,8 @@ public class UserWizardController implements Serializable{
     
     private List<User> usersSystem;
     
+    private long operation;//add=1 - edit=2 - delete=3
+    
     //private UploadedFile file;
              
     private boolean skip;
@@ -50,9 +52,18 @@ public class UserWizardController implements Serializable{
        System.out.println("1----DENTRO 5555 UserWizardController.init()..."); 
        usersSystem = updateUsersSystem();
        skip = false;
+       operation = 1;
        
     }
     // Geters and Setters ------------------------------------------------------
+
+    public long getOperation() {
+        return operation;
+    }
+
+    public void setOperation(long operation) {
+        this.operation = operation;
+    }
     
     public User getSelectedUser() {
         return selectedUser;
@@ -88,11 +99,6 @@ public class UserWizardController implements Serializable{
     
     
     // Actions -----------------------------------------------------------------
-    
-    public void save() {        
-        FacesMessage msg = new FacesMessage("Successful", "Welcome :" + user.getName());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
      
     public String onFlowProcess(FlowEvent event) {
      /*   if(skip) {
@@ -116,10 +122,10 @@ public class UserWizardController implements Serializable{
     
     
     public List<User> updateUsersSystem(){
-        List<User> list = new ArrayList<User>();
-        
+        List<User> list = new ArrayList<User>();        
         System.out.println("Usuario.rol(): "+userSession.getUserView().getRol());
         
+        //Si el usuario logeado tiene rol Admin, cargo todos, sino cargo solo el uruario logeado
         if(userSession.getUserView().getRol().equalsIgnoreCase("ADMINISTRADOR")){
             Map<String, User> userOnline = manager.getUsers();
             Iterator it = userOnline.keySet().iterator();
@@ -136,9 +142,16 @@ public class UserWizardController implements Serializable{
         return list;
     }
     
-    public void update(){
+    public void add(){
+        System.out.println("add()...");
+        operation = 1;
+        user = new User();
+    }
+    
+    public void update(){        
         System.out.println("update()...");
-        System.out.println("update()..." + selectedUser.getCI());
+        System.out.println("update()..." + selectedUser.getNickName());
+        operation = 2;
         usersSystem = updateUsersSystem();
         
         user = selectedUser;
@@ -147,9 +160,28 @@ public class UserWizardController implements Serializable{
      public void delete(){
         System.out.println("delete()...");
         System.out.println("delete()..." + selectedUser);
-        manager.removeUserToSystem(selectedUser.getCI());
-        manager.removeUserOnline(selectedUser.getCI());        
+        operation = 1;//3
+        manager.removeUserToSystem(selectedUser.getNickName());
+        manager.removeUserOnline(selectedUser.getNickName());        
         usersSystem = updateUsersSystem();
     }
-    
+     
+      public void save() {  
+        if(operation == 1){//add
+            manager.addUserToSystem(user);
+            
+        }else if(operation == 2){//edit
+            manager.replaceUser(user);
+        }  
+        usersSystem = updateUsersSystem();  
+        FacesMessage msg = new FacesMessage("Successful", " : " + user.getName());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+      
+    public boolean allowEditPassword(){
+        if(operation == 1){
+            return false;
+        }
+        return !userSession.getUserView().getNickName().equalsIgnoreCase(selectedUser.getNickName()) || !selectedUser.getRol().equalsIgnoreCase("ADMINISTRADOR");
+    }
 }

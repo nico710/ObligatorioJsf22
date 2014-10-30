@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
 /**
@@ -20,7 +21,7 @@ import javax.inject.Named;
  * @author NicolasP1
  */
 @Named("managerController")
-@javax.faces.bean.ApplicationScoped
+@ApplicationScoped
 public class ManagerController implements Serializable {
     
     Map<String,User> userOnline;
@@ -35,7 +36,8 @@ public class ManagerController implements Serializable {
         
         try {
         User user = new User();
-        user.setCI("1234");
+        user.setNickName("1234");
+        user.setCI("12345678");
         user.setPassword("admin");
         user.setCountry("Uruguay");
         user.setBirthday(df.parse(String.valueOf(19760317)));
@@ -46,7 +48,8 @@ public class ManagerController implements Serializable {
         user.setStatus("ACTIVO");
         
         User user2 = new User();
-        user2.setCI("5678");
+        user2.setNickName("5678");
+        user2.setCI("67890123");
         user2.setPassword("admin");
         user2.setCountry("EEUU");
         user2.setBirthday(df.parse(String.valueOf(19750518)));
@@ -58,7 +61,8 @@ public class ManagerController implements Serializable {
         
         
         User user3 = new User();
-        user3.setCI("admin");
+        user3.setNickName("admin");
+        user3.setCI("12345679");
         user3.setPassword("admin");
         user3.setCountry("Inglaterra");
         user3.setBirthday(df.parse(String.valueOf(19450330)));
@@ -68,11 +72,11 @@ public class ManagerController implements Serializable {
         user3.setRol("ADMINISTRADOR");
         user3.setStatus("ACTIVO");
         
-        users.put(user.getCI(), user);    
-        users.put(user2.getCI(), user2);
-        users.put(user3.getCI(), user3);
+        users.put(user.getNickName(), user);    
+        users.put(user2.getNickName(), user2);
+        users.put(user3.getNickName(), user3);
         
-        userOnline.put(user3.getCI(), user3);
+        userOnline.put(user3.getNickName(), user3);
         } catch (Exception e) {
         }
         
@@ -95,12 +99,12 @@ public class ManagerController implements Serializable {
     }
     
     public void addUserOnline(User user){
-        userOnline.put(user.getCI(), user);
+        userOnline.put(user.getNickName(), user);
     }
     
     public void addUserToSystem(User user)
     {
-        users.put(user.getCI(), user);
+        users.put(user.getNickName(), user);
     }
     
     public void removeUserOnline(String user)
@@ -112,6 +116,16 @@ public class ManagerController implements Serializable {
         }
         
         userOnline.remove(user);
+    }
+    
+    public void replaceUser(User user){
+        
+        users.put(user.getNickName(), user);
+        
+        if(userOnline.get(user.getNickName()) != null){
+            userOnline.put(user.getNickName(), user);
+        }
+        
     }
     
      public void removeUserToSystem(String user)    {

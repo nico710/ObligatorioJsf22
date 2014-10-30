@@ -35,9 +35,13 @@ and open the template in the editor.
       <h:form id="formUser" prependId="false">
           <p:separator/>
           <p:dataTable id="tblUsers" var="userTable" value="#{userWizardController.usersSystem}" paginator="true" rows="20" paginatorPosition="bottom" scrollable="true" 
-                    emptyMessage="Sin Registros" scrollHeight="150" selectionMode="single" selection="#{userWizardController.selectedUser}" rowKey="#{userTable.CI}">
+                       emptyMessage="Sin Registros" scrollHeight="150" selectionMode="single" selection="#{userWizardController.selectedUser}" rowKey="#{userTable.nickName}">
             <p:ajax event="rowSelect" update="btnDel" />
-              
+            
+            <p:column headerText="Nickname"  styleClass="left_td">
+                <h:outputText value="#{userTable.nickName}" />
+	    </p:column>  
+            
             <p:column headerText="Nombre"  styleClass="left_td">
                 <h:outputText value="#{userTable.name}" />
 	    </p:column>  
@@ -67,11 +71,11 @@ and open the template in the editor.
            
            <f:facet name="footer">
                 <h:panelGroup id="buttonSet" style="text-align:left;">
-                    <p:commandButton id="btnAdd" icon="ui-icon-plus" title="Actualizar" update=":formUser" action="#{userWizardController.update()}" rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}"/>                                
+                    <p:commandButton id="btnAdd" icon="ui-icon-plus" title="Add" update=":formUser :formWizard" action="#{userWizardController.add()}" rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}" />                                
                     
                     <p:commandButton id="btnEdit" icon="ui-icon ui-icon-pencil" title="Actualizar" update=":formUser :formWizard" action="#{userWizardController.update()}" />                                
                     
-                    <p:commandButton id="btnDel" icon="ui-icon-trash" title="Actualizar" update=":formUser" action="#{userWizardController.delete()}" disabled="#{userController.userView.CI.equalsIgnoreCase(userWizardController.selectedUser.CI)}" rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}">
+                    <p:commandButton id="btnDel" icon="ui-icon-trash" title="Borrar" update=":formUser" action="#{userWizardController.delete()}" disabled="#{userController.userView.nickName.equalsIgnoreCase(userWizardController.selectedUser.nickName)}" rendered="#{(userController.userView.rol eq 'ADMINISTRADOR')}">
                         <p:confirm header="Confirmation" message="Confirma la Operacion?" icon="ui-icon-alert" />
                     </p:commandButton>                               
                     
@@ -94,11 +98,21 @@ and open the template in the editor.
       <h:form id="formWizard" prependId="false">                 
             <p:growl id="growlWizard" sticky="true" showDetail="false" />
 
-            <p:wizard flowListener="#{userWizardController.onFlowProcess}">
+            <p:wizard id="wizard" flowListener="#{userWizardController.onFlowProcess}">
                 <p:tab id="personal" title="Personal">
                     <p:panel header="Datos Personales">
                         <p:messages />
                         <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Nickname: *" />
+                            <p:inputText value="#{userWizardController.user.nickName}" required="true" label="Nickname" disabled="#{userWizardController.operation ne 1}">
+                                <f:validateLength minimum="4" maximum="10" />
+                            </p:inputText>
+                            
+                            <h:outputText value="Password: *" rendered="#{userWizardController.allowEditPassword()}"/>
+                            <p:inputText value="#{userWizardController.user.password}" required="true" label="Password:" rendered="#{userWizardController.allowEditPassword()}" >
+                                <f:validateLength minimum="4" maximum="10" />
+                            </p:inputText>
+                            
                             <h:outputText value="Nombre: *" />
                             <p:inputText value="#{userWizardController.user.name}" required="true" label="Nombre">
                                 <f:validateLength minimum="4" maximum="10" />
@@ -208,6 +222,9 @@ and open the template in the editor.
                     <p:panel header="Confirmation">
                         <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid" width="50%">
                             <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Nickname   " />
+                                <h:outputText value="#{userWizardController.user.nickName}" styleClass="outputLabel"/>
+                                
                                 <h:outputText value="Nombre:   " />
                                 <h:outputText value="#{userWizardController.user.name}" styleClass="outputLabel"/>
 
@@ -254,7 +271,7 @@ and open the template in the editor.
                             
                         </h:panelGrid>
 
-                        <p:commandButton value="Submit" actionListener="#{userWizardController.save}" update="growlWizard" process="@this"/>
+                        <p:commandButton value="Guardar" actionListener="#{userWizardController.save}" update="growlWizard :formUser" process="@this"/>
                     </p:panel>
                 </p:tab>
             </p:wizard>

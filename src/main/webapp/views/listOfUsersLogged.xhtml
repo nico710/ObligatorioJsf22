@@ -58,7 +58,13 @@ and open the template in the editor.
                      </p:column>  
                       <p:column headerText="Rol"  styleClass="center_td">
                           <h:outputText value="#{user.rol}" />
-                     </p:column>             
+                     </p:column>  
+                      <p:column headerText="Nickname"  styleClass="center_td">
+                          <h:outputText value="#{user.nickName}" />
+                     </p:column>  
+                    <p:column headerText="Estado"  styleClass="center_td">
+                        <h:outputText value="#{user.status}" />
+                    </p:column>  
 
                     <f:facet name="footer">
                          <h:panelGroup id="buttonSet" style="text-align:left;">
